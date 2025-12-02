@@ -1,0 +1,34 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "book1",
+      "author": "author1",
+      "publishingDate": ""
+    },
+    {
+      "id": 2,
+      "title": "book2",
+      "author": "author2",
+      "publishingDate": ""
+    },
+    {
+      "id": 3,
+      "title": "book3",
+      "author": "author3",
+      "publishingDate": ""
+    },
+    {
+      "id": 4,
+      "title": "book4",
+      "author": "author4",
+      "publishingDate": ""
+    },
+    {
+      "id": 5,
+      "title": "book5",
+      "author": "author5",
+      "publishingDate": ""
+    }
+  ]
+}

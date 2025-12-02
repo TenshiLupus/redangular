@@ -1,0 +1,3 @@
+.add-book-sticky {
+  z-index: 7; /* above cards/content */
+}
