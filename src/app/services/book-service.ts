@@ -26,7 +26,7 @@ export class BookService {
   createBook(data: {
     title: string;
     author: string;
-    publishedDate: string; // 'yyyy-MM-dd'
+    publishedDate: string;
     userId: number;
   }): Observable<UserBook> {
     return this.http.post<UserBook>(`${environment.apiBaseUrl}/Books`, data);
