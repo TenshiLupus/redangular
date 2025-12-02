@@ -9,7 +9,7 @@ import { BookService } from '../services/book-service';
   standalone: true,
   imports: [DatePipe],
   template: `
-    <!-- Top row: text + DESKTOP/TABLET buttons -->
+  
     <div
       class="d-flex justify-content-between
              align-items-start align-items-sm-center"
@@ -24,7 +24,7 @@ import { BookService } from '../services/book-service';
         </div>
       </div>
 
-      <!-- Desktop / tablet buttons (sm and up) -->
+  
       <div class="d-none d-sm-flex gap-2 ms-sm-3">
         <button type="button" class="btn btn-outline-primary btn-sm" (click)="edit()">Edit</button>
         <button type="button" class="btn btn-outline-danger btn-sm" (click)="delete()">
@@ -33,7 +33,7 @@ import { BookService } from '../services/book-service';
       </div>
     </div>
 
-    <!-- Mobile buttons (xs only) -->
+
     <div class="d-grid gap-2 d-sm-none mt-2">
       <button type="button" class="btn btn-outline-primary" (click)="edit()">Edit</button>
       <button type="button" class="btn btn-outline-danger" (click)="delete()">Delete</button>
