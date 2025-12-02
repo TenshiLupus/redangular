@@ -14,7 +14,7 @@ export class AuthService {
   userId = signal<number | null>(null);
 
   constructor(private http: HttpClient) {
-    // Optional: restore login state from localStorage on refresh
+    
     const storedId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
 
