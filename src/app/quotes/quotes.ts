@@ -13,11 +13,11 @@ import { environment } from '../../environments/environment';
   template: `
     <section class="container my-4 mb-5">
       <div class="card shadow-sm">
-        <!-- Header -->
+        
         <div class="card-header d-flex justify-content-between align-items-center">
           <h2 class="h5 mb-0">User Quotes</h2>
 
-          <!-- Header button: visible from sm and up -->
+          
           <button
             type="button"
             class="btn btn-primary btn-sm d-none d-sm-inline-flex align-items-center gap-1"
@@ -28,7 +28,7 @@ import { environment } from '../../environments/environment';
           </button>
         </div>
 
-        <!-- Body -->
+        
         <div class="card-body">
           @if (loading()) {
           <div class="d-flex align-items-center">
@@ -57,7 +57,7 @@ import { environment } from '../../environments/environment';
         </div>
       </div>
 
-      <!-- Sticky bottom button: only on extra-small screens -->
+      
       <button
         type="button"
         class="btn btn-primary btn-lg d-sm-none fixed-bottom w-100 rounded-0 add-quote-sticky"
@@ -117,7 +117,7 @@ export class QuotesComponent implements OnInit {
   }
 
   goToCreate(): void {
-    // current route: /users/:id/quotes → go to /users/:id/quotes/create
+    
     this.router.navigate(['create'], { relativeTo: this.route });
   }
 }
