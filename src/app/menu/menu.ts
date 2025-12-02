@@ -9,16 +9,16 @@ import { AuthService } from '../services/auth';
   template: `
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
       <div class="container-fluid">
-        <!-- Brand -->
+      
         <a
           class="navbar-brand d-flex align-items-center gap-2"
           [routerLink]="['/users', userId, 'books']"
         >
           <i class="fa-regular fa-house fa-lg"></i>
-          <span>User {{ userId }}</span>
+          
         </a>
 
-        <!-- Toggler (mobile) -->
+       
         <button
           class="navbar-toggler"
           type="button"
@@ -30,7 +30,7 @@ import { AuthService } from '../services/auth';
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Collapsible content -->
+       
         <div class="collapse navbar-collapse" [class.show]="!isCollapsed" id="mainNavbar">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -70,7 +70,6 @@ export class MenuComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  // navbar collapsed by default on mobile
   isCollapsed = true;
 
   toggleNavbar(): void {
