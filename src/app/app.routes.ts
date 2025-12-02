@@ -15,18 +15,18 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    // 🔥 root guard: redirects based on login state
+   
     canActivate: [
       () => {
         const auth = inject(AuthService);
         const router = inject(Router);
 
         if (auth.isLoggedIn()) {
-          // already logged in → go to quotes (or home, your choice)
+          
           return router.parseUrl('/books');
         }
 
-        // not logged in → go to login
+        
         return router.parseUrl('/login');
       },
     ],
