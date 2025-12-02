@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
           <h2 class="card-title mb-4 text-center">Login</h2>
 
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <!-- Username -->
+           
             <div class="mb-3">
               <label class="form-label" for="username">Username</label>
               <input
@@ -32,7 +32,7 @@ import { CommonModule } from '@angular/common';
               }
             </div>
 
-            <!-- Password -->
+          
             <div class="mb-3">
               <label class="form-label" for="password">Password</label>
               <input
@@ -49,14 +49,14 @@ import { CommonModule } from '@angular/common';
               }
             </div>
 
-            <!-- Error message -->
+            
             @if (errorMessage) {
             <div class="alert alert-danger py-2">
               {{ errorMessage }}
             </div>
             }
 
-            <!-- Submit button -->
+            
             <button
               type="submit"
               class="btn btn-primary w-100 mt-2"
@@ -72,7 +72,7 @@ import { CommonModule } from '@angular/common';
               {{ loading ? 'Logging in...' : 'Login' }}
             </button>
 
-            <!-- Register link -->
+            
             <p class="text-center mt-3 mb-0">
               <small>
                 Don't have an account?
