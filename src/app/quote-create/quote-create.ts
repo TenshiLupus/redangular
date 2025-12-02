@@ -27,7 +27,7 @@ import { QuoteService } from '../services/quote-service';
           }
 
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <!-- Description -->
+           
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
               <textarea
@@ -45,7 +45,7 @@ import { QuoteService } from '../services/quote-service';
               }
             </div>
 
-            <!-- Author -->
+            
             <div class="mb-3">
               <label for="author" class="form-label">Author</label>
               <input
@@ -61,7 +61,7 @@ import { QuoteService } from '../services/quote-service';
               }
             </div>
 
-            <!-- Actions -->
+            
             <div class="d-flex align-items-center gap-2">
               <button
                 type="submit"
@@ -131,7 +131,7 @@ export class QuoteCreateComponent implements OnInit {
       .createQuote({
         description: value.description,
         author: value.author,
-        userId: this.userId, // backend can ignore this if it uses JWT claims
+        userId: this.userId, 
       })
       .subscribe({
         next: () => {
