@@ -31,7 +31,7 @@ import { environment } from '../../environments/environment';
           </div>
           } @else {
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <!-- Description -->
+            
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
               <textarea
@@ -49,7 +49,7 @@ import { environment } from '../../environments/environment';
               }
             </div>
 
-            <!-- Author -->
+         
             <div class="mb-3">
               <label for="author" class="form-label">Author</label>
               <input
@@ -65,7 +65,7 @@ import { environment } from '../../environments/environment';
               }
             </div>
 
-            <!-- Actions -->
+         
             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-start">
               <button
                 type="submit"
