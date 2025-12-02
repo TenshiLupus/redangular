@@ -27,7 +27,7 @@ import { BookService } from '../services/book-service';
           }
 
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <!-- Title -->
+            
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input
@@ -43,7 +43,7 @@ import { BookService } from '../services/book-service';
               }
             </div>
 
-            <!-- Author -->
+           
             <div class="mb-3">
               <label for="author" class="form-label">Author</label>
               <input
@@ -59,7 +59,6 @@ import { BookService } from '../services/book-service';
               }
             </div>
 
-            <!-- Published date -->
             <div class="mb-3">
               <label for="publishedDate" class="form-label">Published date</label>
               <input
@@ -77,7 +76,7 @@ import { BookService } from '../services/book-service';
               }
             </div>
 
-            <!-- Actions -->
+           
             <div class="d-flex align-items-center gap-2">
               <button
                 type="submit"
@@ -113,7 +112,7 @@ export class BookCreateComponent implements OnInit {
   form = this.fb.nonNullable.group({
     title: ['', Validators.required],
     author: ['', Validators.required],
-    publishedDate: ['', Validators.required], // date input, backend can parse as needed
+    publishedDate: ['', Validators.required], 
   });
 
   userId!: number;
