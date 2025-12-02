@@ -16,7 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
           <h2 class="card-title mb-4 text-center">Register</h2>
 
           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <!-- Username -->
+            
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input
@@ -35,7 +35,7 @@ import { HttpErrorResponse } from '@angular/common/http';
               }
             </div>
 
-            <!-- Password -->
+            
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input
@@ -54,7 +54,7 @@ import { HttpErrorResponse } from '@angular/common/http';
               }
             </div>
 
-            <!-- Confirm Password -->
+            
             <div class="mb-3">
               <label for="confirmPassword" class="form-label"> Confirm Password </label>
               <input
@@ -77,7 +77,7 @@ import { HttpErrorResponse } from '@angular/common/http';
               }
             </div>
 
-            <!-- Submit button -->
+            
             <button
               type="submit"
               class="btn btn-primary w-100"
