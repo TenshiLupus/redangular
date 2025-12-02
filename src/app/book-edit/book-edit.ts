@@ -31,7 +31,7 @@ import { AuthService } from '../services/auth';
           </div>
           } @else {
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <!-- Title -->
+            
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
               <input
@@ -46,7 +46,7 @@ import { AuthService } from '../services/auth';
               }
             </div>
 
-            <!-- Author -->
+           
             <div class="mb-3">
               <label for="author" class="form-label">Author</label>
               <input
@@ -61,7 +61,7 @@ import { AuthService } from '../services/auth';
               }
             </div>
 
-            <!-- Published date -->
+           
             <div class="mb-3">
               <label for="publishedDate" class="form-label"> Published date </label>
               <input
@@ -78,7 +78,7 @@ import { AuthService } from '../services/auth';
               }
             </div>
 
-            <!-- Actions -->
+          
             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-start">
               <button
                 type="submit"
@@ -149,7 +149,7 @@ export class BookEditComponent implements OnInit {
         this.form.patchValue({
           title: book.title,
           author: book.author,
-          // ensure yyyy-MM-dd for <input type="date">
+          
           publishedDate: (book.publishedDate as any)?.toString().substring(0, 10),
         });
       },
@@ -170,7 +170,7 @@ export class BookEditComponent implements OnInit {
     this.submitting.set(true);
     this.error.set(null);
 
-    const value = this.form.getRawValue(); // all strings (non-nullable)
+    const value = this.form.getRawValue();
 
     const payload: Partial<UserBook> = {
       title: value.title,
