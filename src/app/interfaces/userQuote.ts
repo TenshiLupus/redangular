@@ -3,4 +3,5 @@ export interface UserQuote {
   id: number;
   description: string;
   author: string;
+  isFavorite: boolean;
 }

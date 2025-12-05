@@ -46,10 +46,14 @@ import { environment } from '../../environments/environment';
           } @else { @if (quotes().length > 0) {
           <ul class="list-group list-group-flush">
             @for (q of quotes(); track q.id) {
-            <li class="list-group-item">
-              <app-quote [quote]="q" (deleted)="onQuoteDeleted($event)"></app-quote>
-            </li>
-            }
+  <li class="list-group-item">
+    <app-quote
+      [quote]="q"
+      (deleted)="onQuoteDeleted($event)"
+      (favoriteChanged)="onFavoriteChanged($event)"
+    ></app-quote>
+  </li>
+}
           </ul>
           } @else {
           <p class="text-muted mb-0">This user has no quotes yet.</p>
@@ -117,7 +121,15 @@ export class QuotesComponent implements OnInit {
   }
 
   goToCreate(): void {
-    
+
     this.router.navigate(['create'], { relativeTo: this.route });
+  }
+
+  onFavoriteChanged(event: { id: number; isFavorite: boolean }): void {
+    this.quotes.update((current) =>
+      current.map((q) =>
+        q.id === event.id ? { ...q, isFavorite: event.isFavorite } : q
+      )
+    );
   }
 }

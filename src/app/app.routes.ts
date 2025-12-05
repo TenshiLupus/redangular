@@ -10,23 +10,24 @@ import { BooksComponent } from './books/books';
 import { QuoteEditComponent } from './quote-edit/quote-edit';
 import { BookCreateComponent } from './book-create/book-create';
 import { QuoteCreateComponent } from './quote-create/quote-create';
+import { ForumComponent } from './forum/forum';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-   
+
     canActivate: [
       () => {
         const auth = inject(AuthService);
         const router = inject(Router);
 
         if (auth.isLoggedIn()) {
-          
+
           return router.parseUrl('/books');
         }
 
-        
+
         return router.parseUrl('/login');
       },
     ],
@@ -59,8 +60,9 @@ export const routes: Routes = [
   { path: 'users/:id/books/create', component: BookCreateComponent },
   { path: 'books', component: BooksComponent },
   { path: 'books/:id/edit', component: BookEditComponent },
-  
+
   { path: 'users/:userId/quotes', component: QuotesComponent },
   { path: 'quotes/:id/edit', component: QuoteEditComponent },
   { path: 'users/:id/quotes/create', component: QuoteCreateComponent },
+  {path: 'forum', component: ForumComponent},
 ];
