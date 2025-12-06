@@ -16,7 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
           <h2 class="card-title mb-4 text-center">Register</h2>
 
           <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            
+            <!-- Username -->
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
               <input
@@ -25,17 +25,17 @@ import { HttpErrorResponse } from '@angular/common/http';
                 class="form-control"
                 formControlName="username"
                 [class.is-invalid]="
-                  registerForm.controls.username.invalid && registerForm.controls.username.touched
+                  registerForm.controls.username.invalid &&
+                  registerForm.controls.username.touched
                 "
               />
-
-              @if ( registerForm.controls.username.invalid && registerForm.controls.username.touched
-              ) {
-              <div class="invalid-feedback">Username is required</div>
+              @if (registerForm.controls.username.invalid &&
+                    registerForm.controls.username.touched) {
+                <div class="invalid-feedback">Username is required</div>
               }
             </div>
 
-            
+            <!-- Password -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input
@@ -44,19 +44,23 @@ import { HttpErrorResponse } from '@angular/common/http';
                 class="form-control"
                 formControlName="password"
                 [class.is-invalid]="
-                  registerForm.controls.password.invalid && registerForm.controls.password.touched
+                  registerForm.controls.password.invalid &&
+                  registerForm.controls.password.touched
                 "
               />
-
-              @if ( registerForm.controls.password.invalid && registerForm.controls.password.touched
-              ) {
-              <div class="invalid-feedback">Password is required (min 6 characters)</div>
+              @if (registerForm.controls.password.invalid &&
+                    registerForm.controls.password.touched) {
+                <div class="invalid-feedback">
+                  Password is required (min 6 characters)
+                </div>
               }
             </div>
 
-            
+            <!-- Confirm password -->
             <div class="mb-3">
-              <label for="confirmPassword" class="form-label"> Confirm Password </label>
+              <label for="confirmPassword" class="form-label">
+                Confirm Password
+              </label>
               <input
                 id="confirmPassword"
                 type="password"
@@ -65,43 +69,55 @@ import { HttpErrorResponse } from '@angular/common/http';
                 [class.is-invalid]="
                   (registerForm.controls.confirmPassword.invalid &&
                     registerForm.controls.confirmPassword.touched) ||
-                  (passwordsDoNotMatch && registerForm.controls.confirmPassword.touched)
+                  (passwordsDoNotMatch &&
+                    registerForm.controls.confirmPassword.touched)
                 "
               />
-
-              @if ( registerForm.controls.confirmPassword.invalid &&
-              registerForm.controls.confirmPassword.touched ) {
-              <div class="invalid-feedback">Please confirm your password</div>
-              } @else if ( passwordsDoNotMatch && registerForm.controls.confirmPassword.touched ) {
-              <div class="invalid-feedback">Passwords do not match</div>
+              @if (registerForm.controls.confirmPassword.invalid &&
+                    registerForm.controls.confirmPassword.touched) {
+                <div class="invalid-feedback">Please confirm your password</div>
+              } @else if (passwordsDoNotMatch &&
+                          registerForm.controls.confirmPassword.touched) {
+                <div class="invalid-feedback">Passwords do not match</div>
               }
             </div>
 
-            
+            <!-- Primary submit button -->
             <button
               type="submit"
               class="btn btn-primary w-100"
               [disabled]="registerForm.invalid || passwordsDoNotMatch || loading"
             >
               @if (loading) {
-              <span
-                class="spinner-border spinner-border-sm me-2"
-                role="status"
-                aria-hidden="true"
-              ></span>
+                <span
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
               }
               {{ loading ? 'Creating account…' : 'Register' }}
             </button>
 
-         
+            <!-- NEW: Back to login button -->
+            <button
+              type="button"
+              class="btn btn-outline-secondary w-100 mt-2"
+              (click)="goBackToLogin()"
+              [disabled]="loading"
+            >
+              Back to login
+            </button>
+
+            <!-- Messages -->
             @if (errorMessage) {
-            <div class="alert alert-danger mt-3 mb-0">
-              {{ errorMessage }}
-            </div>
-            } @if (successMessage) {
-            <div class="alert alert-success mt-3 mb-0">
-              {{ successMessage }}
-            </div>
+              <div class="alert alert-danger mt-3 mb-0">
+                {{ errorMessage }}
+              </div>
+            }
+            @if (successMessage) {
+              <div class="alert alert-success mt-3 mb-0">
+                {{ successMessage }}
+              </div>
             }
           </form>
         </div>
@@ -144,7 +160,6 @@ export class RegisterComponent {
       return;
     }
 
-    //reset mesagge if there was a previous one
     this.loading = true;
     this.errorMessage = '';
     this.successMessage = '';
@@ -159,11 +174,14 @@ export class RegisterComponent {
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-
         const backendError = (err.error as any)?.message ?? err.error ?? err.message;
-
-        this.errorMessage = backendError || 'Registration failed. Please try again.';
+        this.errorMessage =
+          backendError || 'Registration failed. Please try again.';
       },
     });
+  }
+
+  goBackToLogin(): void {
+    this.router.navigate(['/login']);
   }
 }

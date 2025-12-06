@@ -1,8 +1,10 @@
-import { Component, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../services/auth';
-import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { finalize } from 'rxjs';
+
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,6 @@ import { CommonModule } from '@angular/common';
           <h2 class="card-title mb-4 text-center">Login</h2>
 
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-           
             <div class="mb-3">
               <label class="form-label" for="username">Username</label>
               <input
@@ -24,15 +25,15 @@ import { CommonModule } from '@angular/common';
                 class="form-control"
                 formControlName="username"
                 [class.is-invalid]="
-                  loginForm.controls.username.invalid && loginForm.controls.username.touched
+                  loginForm.controls.username.invalid &&
+                  loginForm.controls.username.touched
                 "
               />
-              @if ( loginForm.controls.username.invalid && loginForm.controls.username.touched ) {
-              <div class="invalid-feedback">Username is required</div>
+              @if (loginForm.controls.username.invalid && loginForm.controls.username.touched) {
+                <div class="invalid-feedback">Username is required</div>
               }
             </div>
 
-          
             <div class="mb-3">
               <label class="form-label" for="password">Password</label>
               <input
@@ -41,38 +42,36 @@ import { CommonModule } from '@angular/common';
                 class="form-control"
                 formControlName="password"
                 [class.is-invalid]="
-                  loginForm.controls.password.invalid && loginForm.controls.password.touched
+                  loginForm.controls.password.invalid &&
+                  loginForm.controls.password.touched
                 "
               />
-              @if ( loginForm.controls.password.invalid && loginForm.controls.password.touched ) {
-              <div class="invalid-feedback">Password is required</div>
+              @if (loginForm.controls.password.invalid && loginForm.controls.password.touched) {
+                <div class="invalid-feedback">Password is required</div>
               }
             </div>
 
-            
-            @if (errorMessage) {
-            <div class="alert alert-danger py-2">
-              {{ errorMessage }}
-            </div>
+            @if (errorMessage()) {
+              <div class="alert alert-danger py-2">
+                {{ errorMessage() }}
+              </div>
             }
 
-            
             <button
               type="submit"
               class="btn btn-primary w-100 mt-2"
-              [disabled]="loginForm.invalid || loading"
+              [disabled]="loginForm.invalid || loading()"
             >
-              @if (loading) {
-              <span
-                class="spinner-border spinner-border-sm me-2"
-                role="status"
-                aria-hidden="true"
-              ></span>
+              @if (loading()) {
+                <span
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
               }
-              {{ loading ? 'Logging in...' : 'Login' }}
+              {{ loading() ? 'Logging in...' : 'Login' }}
             </button>
 
-            
             <p class="text-center mt-3 mb-0">
               <small>
                 Don't have an account?
@@ -84,14 +83,14 @@ import { CommonModule } from '@angular/common';
       </div>
     </div>
   `,
-  styles: [],
 })
 export class LoginComponent {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  loading = false;
-  errorMessage = '';
+  // 🔹 signals instead of plain booleans/strings
+  loading = signal(false);
+  errorMessage = signal('');
 
   loginForm = new FormGroup({
     username: new FormControl('', {
@@ -104,23 +103,40 @@ export class LoginComponent {
     }),
   });
 
-  onSubmit() {
-    if (this.loginForm.invalid) return;
+  onSubmit(): void {
+    if (this.loginForm.invalid || this.loading()) {
+      return;
+    }
 
-    this.loading = true;
-    this.errorMessage = '';
+    this.loading.set(true);
+    this.errorMessage.set('');
 
     const { username, password } = this.loginForm.getRawValue();
 
-    this.auth.login(username!, password!).subscribe({
-      next: (res) => {
-        this.loading = false;
-        this.router.navigate(['/users', res.userId, 'books']);
-      },
-      error: () => {
-        this.loading = false;
-        this.errorMessage = 'Invalid login';
-      },
-    });
+    console.log('[LoginComponent] submitting login', username);
+
+    this.auth
+      .login(username!, password!)
+      .pipe(
+        finalize(() => {
+          console.log('[LoginComponent] finalize -> set loading false');
+          this.loading.set(false);
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          console.log('[LoginComponent] login success', res);
+          this.router.navigate(['/users', res.userId, 'books']);
+        },
+        error: (err) => {
+          console.log('[LoginComponent] ERROR HANDLER CALLED', err);
+
+          if (err.status === 400 || err.status === 401) {
+            this.errorMessage.set('Invalid username or password.');
+          } else {
+            this.errorMessage.set('Login failed. Please try again.');
+          }
+        },
+      });
   }
 }
