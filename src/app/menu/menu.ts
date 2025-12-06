@@ -122,9 +122,12 @@ export class MenuComponent {
   constructor() {
 
     const stored = localStorage.getItem('theme');
-    if (stored === 'light') {
+    if (stored === 'dark') {
+      this.isDarkMode = true;
+    } else if (stored === 'light') {
       this.isDarkMode = false;
     }
+
     this.applyTheme();
   }
 
