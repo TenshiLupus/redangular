@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="d-flex justify-content-center align-items-center min-vh-100 bg-body">
       <div class="card shadow-sm" style="max-width: 420px; width: 100%;">
         <div class="card-body">
           <h2 class="card-title mb-4 text-center">Register</h2>
@@ -93,7 +93,7 @@ import { HttpErrorResponse } from '@angular/common/http';
               {{ loading ? 'Creating account…' : 'Register' }}
             </button>
 
-            <!-- Error / success messages -->
+         
             @if (errorMessage) {
             <div class="alert alert-danger mt-3 mb-0">
               {{ errorMessage }}
@@ -144,6 +144,7 @@ export class RegisterComponent {
       return;
     }
 
+    //reset mesagge if there was a previous one
     this.loading = true;
     this.errorMessage = '';
     this.successMessage = '';

@@ -11,8 +11,7 @@ import { BookService } from '../services/book-service';
   template: `
   
     <div
-      class="d-flex justify-content-between
-             align-items-start align-items-sm-center"
+      class="d-flex align-items-center py-3"
     >
       <div class="flex-grow-1">
         <div class="fw-semibold">
@@ -26,8 +25,8 @@ import { BookService } from '../services/book-service';
 
   
       <div class="d-none d-sm-flex gap-2 ms-sm-3">
-        <button type="button" class="btn btn-outline-primary btn-sm" (click)="edit()">Edit</button>
-        <button type="button" class="btn btn-outline-danger btn-sm" (click)="delete()">
+        <button type="button" class="btn btn-outline-primary book-action-btn" (click)="edit()">Edit</button>
+        <button type="button" class="btn btn-outline-danger book-action-btn" (click)="delete()">
           Delete
         </button>
       </div>
@@ -35,8 +34,8 @@ import { BookService } from '../services/book-service';
 
 
     <div class="d-grid gap-2 d-sm-none mt-2">
-      <button type="button" class="btn btn-outline-primary" (click)="edit()">Edit</button>
-      <button type="button" class="btn btn-outline-danger" (click)="delete()">Delete</button>
+      <button type="button" class="btn btn-outline-primary book-action-btn" (click)="edit()">Edit</button>
+      <button type="button" class="btn btn-outline-danger book-action-btn" (click)="delete()">Delete</button>
     </div>
   `,
 })
