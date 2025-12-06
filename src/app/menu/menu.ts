@@ -117,7 +117,7 @@ export class MenuComponent {
   private router = inject(Router);
 
   isCollapsed = true;
-  isDarkMode = true;
+  isDarkMode = false;
 
   constructor() {
 
