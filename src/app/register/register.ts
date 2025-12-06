@@ -98,7 +98,7 @@ import { HttpErrorResponse } from '@angular/common/http';
               {{ loading ? 'Creating account…' : 'Register' }}
             </button>
 
-            <!-- NEW: Back to login button -->
+           
             <button
               type="button"
               class="btn btn-outline-secondary w-100 mt-2"
@@ -108,7 +108,7 @@ import { HttpErrorResponse } from '@angular/common/http';
               Back to login
             </button>
 
-            <!-- Messages -->
+            >
             @if (errorMessage) {
               <div class="alert alert-danger mt-3 mb-0">
                 {{ errorMessage }}

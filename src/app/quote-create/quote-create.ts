@@ -12,13 +12,7 @@ import { QuoteService } from '../services/quote-service';
     <section class="container my-4">
       <div class="card shadow-sm">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="h5 mb-0">Create quote</h2>
-
-            <button type="button" class="btn btn-outline-secondary btn-sm" (click)="goBack()">
-              Cancel
-            </button>
-          </div>
+          
 
           @if (error()) {
           <div class="alert alert-danger">
